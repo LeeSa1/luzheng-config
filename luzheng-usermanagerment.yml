@@ -8,7 +8,7 @@ server:
   datasource:
     druid:
       username: root
-      password: hoslib123
+      password: 123456
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://localhost:3306/user_manament?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false
 
