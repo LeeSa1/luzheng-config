@@ -1,0 +1,45 @@
+server:
+  port: 8881
+  servlet:
+    context-path: /auth
+
+
+spring:
+  datasource:
+    username: root
+    password: hoslib123
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.110.146.65:3306/user_managerment?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true&serverTimezone=GMT
+    type: com.alibaba.druid.pool.DruidDataSource
+    hikari:
+      # 最小的连接池数量。为了高峰的性能和相应，一般设成同（maximum-pool-size）一样。
+      minimum-idle: 10
+      # 连接池中最大的的连接数，一个MySQL实例最多允许几百个连接（max_connections），请不要设的过大。如果大量连接未正常关闭，将会在一段时间内（wait_timeout）无连接可用。
+      maximum-pool-size: 150
+      # 连接池的名字
+      pool-name: ecommerce-pool
+      # 只读数据库时设为True
+      read-only: false
+      # 连接的最长存活时间。max-lifetime 和 idle-timeout 最好设置小于（wait_timeout）数分钟，防止mysql关闭连接。
+      max-lifetime: 200000
+      # 默认为600000ms（10分钟）,有且仅当minimum-idle 小于 maximum-pool-size，这个参数才生效去移除超过idleTimeout 的连接.
+      idle-timeout: 600000
+      # SQL 客户端从连接池中获取连接的超时时间，如果超时，将会抛出SQLException
+      connection-timeout: 30000
+      validation-timeout: 3000
+  redis:
+    host: 47.110.146.65
+    database: 1
+    port: 6379
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http:admin:niaoren@//localhost:8100/eureka/
+
+mybatis:
+  type-aliases-package: com.niaoren.entity
+  mapper-locations: classpath:mapper/*.xml
